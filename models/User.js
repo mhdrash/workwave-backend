@@ -2,12 +2,11 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema(
   {
-    cpr: {
+    username: {
       type: Number,
       required: true,
       unique: true,
-      trim: true,
-      length: 9,
+      minlength: 3,
     },
     is_employer: {
       type: Boolean,
