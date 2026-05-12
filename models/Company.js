@@ -30,6 +30,9 @@ const companySchema = new mongoose.Schema(
         website: {
             type: String,
         },
+        employer: {
+            ref: 'User',
+        }
     },
     { timestamps: true }
 );
