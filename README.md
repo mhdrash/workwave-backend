@@ -1,26 +1,27 @@
-# Steps to clone template
+# WorkWave - Recruitment Platform (Backend API)
 
-1. Create folder for your project and cd into it
+**WorkWave** is a robust Backend API designed to power a modern recruitment platform. It serves as the digital bridge between employers looking for talent and job seekers searching for their next career move.
 
-2. Perform the following commands in the command line
+---
+
+## 🚀 Project Overview
+
+The WorkWave backend provides a seamless integration for managing job postings and applications, built with a focus on performance, security, and scalability.
+
+### Core Functionalities:
+* **For Employers:** Secure endpoints to post job vacancies, manage listings, and review applicant data.
+* **For Job Seekers:** Advanced filtering and search capabilities to find the most relevant career opportunities.
+* **Security & Auth:** Implementation of **JWT (JSON Web Tokens)** for secure user authentication and role-based access control.
+* **Tech Stack:** Built using the **MERN Stack** (Node.js, Express.js, and MongoDB).
+
+---
+
+## 🛠 Getting Started (Setup & Installation)
+
+Follow these steps to set up the backend environment on your local machine:
+
+### 1. Create project folder
+Create a folder for your project and navigate into it:
 ```bash
-git clone https://github.com/SEB-PT-8/Unit03-Auth-Template-Backend.git .
-rm -rf .git
-rm README.md
-```
-
-3. Create a .env file with the following 2 values of your database connection:
-```
-MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.jbfjdbbdkkj.mongodb.net/libraryDB?retryWrites=true&w=majority&appName=Cluster0
-JWT_SECRET=L2d6ZjAV
-```
-
-
-4. run:
-```bash
-npm i
-```
-
-
-
-
+mkdir workwave-backend
+cd workwave-backend
