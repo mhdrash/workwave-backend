@@ -14,10 +14,10 @@ const JobCardSchema = new mongoose.Schema(
       minlenght: 30,
     },
     company: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Company"
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company"
     }
-    
+
   }
 );
 
