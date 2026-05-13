@@ -24,4 +24,16 @@ routers.post('/', async (req, res) => {
     }
 });
 
+routers.get('/', async (req, res) => {
+    try {
+        const jobCards = await JobCard.find().populate('company', 'name');
+        res.status(200).json({ jobCards });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ err: err.message });
+    }
+});
+
+
+
 module.exports = routers;

@@ -7,10 +7,7 @@ const cors = require('cors');
 const logger = require('morgan');
 const authRouter = require('./controllers/auth.routes');
 const verifyToken = require('./middleware/verify-token');
-const companyRouter = require('./controllers/company');
-const applicationRouter = require('./controllers/application');
-const jobCardRouter = require('./controllers/job.cards');
-const profileRoutes = require("./controllers/profile.routes");
+
 
 mongoose.connect(process.env.MONGODB_URI);
 
