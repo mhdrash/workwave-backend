@@ -14,7 +14,7 @@ const educationSchema = new mongoose.Schema({
         required: true,
     },
     date: {
-        type: date,
+        type: String,
 
     },
     grade: {
@@ -44,11 +44,11 @@ const experienceSchema = new mongoose.Schema({
         required: true,
     },
     startDate: {
-        type: date,
+        type: String,
 
     },
     endDate: {
-        type: date,
+        type: String,
 
     },
     description: {
@@ -79,4 +79,4 @@ const newProfile = {
 }
 
 
-module.exports = mongoose.model('profile', JobCardSchema);
+module.exports = mongoose.model('profile', ProfileSchema);
