@@ -8,12 +8,14 @@ router.post('/', async (req, res) => {
     try {
         const { name, cr, description, logo, crCert, website, employerId } = req.body;
 
+        if (!name || !cr || !description || !crCert) {
+            return res.status(400).json({ err: 'Missing required fields' });
+        }
 
         const existingCompany = await Company.findOne({ name });
         if (existingCompany) {
             return res.status(409).json({ err: 'Company already exists' });
         }
-
 
         const newCompany = await Company.create({
             name,
@@ -35,6 +37,9 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const companies = await Company.find().populate('employer', 'username');
+        if (companies.length === 0) {
+            return res.status(404).json({ message: 'No companies found' });
+        }
         res.status(200).json({ companies });
     } catch (err) {
         console.error(err);
@@ -85,7 +90,7 @@ router.delete('/:id', async (req, res) => {
         if (!company) {
             return res.status(404).json({ err: 'Company not found' });
         }
-        res.status(200).json({ msg: 'Company deleted successfully' });
+        res.status(200).json({ msg: 'Company deleted successfully', company });
     } catch (err) {
         console.error(err);
         res.status(500).json({ err: err.message });

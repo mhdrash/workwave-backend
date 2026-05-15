@@ -21,7 +21,7 @@ const companySchema = new mongoose.Schema(
             required: true
         },
         logo: {
-            type: Image,
+            type: String,
         },
         crCert: {
             type: String,
