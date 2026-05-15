@@ -1,39 +1,74 @@
-const routers = require('express').Router();
+const router = require('express').Router();
+const Application = require('../models/Application');
 const JobCard = require('../models/JobCard');
-const Company = require('../models/Company');
 
-routers.post('/', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
-        const { title, description, companyId } = req.body;
+        const { applicantId, jobId } = req.body;
 
-        const company = await Company.findById(companyId);
-        if (!company) {
-            return res.status(404).json({ err: 'Company not found' });
+        const job = await JobCard.findById(jobId);
+        if (!job) {
+            return res.status(404).json({ err: 'Job card not found' });
         }
 
-        const newJobCard = await JobCard.create({
-            title,
-            description,
-            company: companyId
+        const existingApplication = await Application.findOne({ applicant: applicantId, job: jobId });
+        if (existingApplication) {
+            return res.status(409).json({ err: 'Already applied to this job' });
+        }
+
+        const newApplication = await Application.create({
+            applicant: applicantId,
+            job: jobId
         });
 
-        res.status(201).json({ jobCard: newJobCard });
+        res.status(201).json({ application: newApplication });
     } catch (err) {
         console.error(err);
         res.status(500).json({ err: err.message });
     }
 });
 
-routers.get('/', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
-        const jobCards = await JobCard.find().populate('company', 'name');
-        res.status(200).json({ jobCards });
+        const applications = await Application.find()
+            .populate('applicant', 'username')
+            .populate('job', 'title description');
+        if (applications.length === 0) {
+            return res.status(404).json({ err: 'No applications found' });
+        }
+        res.status(200).json({ applications });
     } catch (err) {
         console.error(err);
         res.status(500).json({ err: err.message });
     }
 });
 
+router.get('/:id', async (req, res) => {
+    try {
+        const application = await Application.findById(req.params.id)
+            .populate('applicant', 'username')
+            .populate('job', 'title description');
+        if (!application) {
+            return res.status(404).json({ err: 'Application not found' });
+        }
+        res.status(200).json({ application });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ err: err.message });
+    }
+});
 
+router.delete('/:id', async (req, res) => {
+    try {
+        const deletedApplication = await Application.findByIdAndDelete(req.params.id);
+        if (!deletedApplication) {
+            return res.status(404).json({ err: 'Application not found' });
+        }
+        res.status(200).json({ msg: 'Application deleted successfully' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ err: err.message });
+    }
+});
 
-module.exports = routers;
+module.exports = router;

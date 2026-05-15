@@ -1,9 +1,8 @@
-const routers = require('express').Router();
+const router = require('express').Router();
 const JobCard = require('../models/JobCard');
 const Company = require('../models/Company');
-const router = require('./company.routes');
 
-routers.post('/', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const { title, description, companyId } = req.body;
 
@@ -28,6 +27,9 @@ routers.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const jobCards = await JobCard.find().populate('company', 'name');
+        if (jobCards.length === 0) {
+            return res.status(404).json({ err: 'No job cards found' });
+        }
         res.status(200).json({ jobCards });
     } catch (err) {
         console.error(err);
@@ -79,4 +81,4 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-module.exports = routers;
+module.exports = router;
