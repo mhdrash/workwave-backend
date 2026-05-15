@@ -27,7 +27,7 @@ app.use('/auth', authRouter);
 app.use('/company', companyRouter);
 app.use('/applications', applicationRouter);
 app.use('/job-cards', jobCardRouter);
-app.use("profile", profileRouter)
+app.use("/profile", profileRouter)
 
 app.listen(3000, () => {
   console.log('The express app is ready!');
