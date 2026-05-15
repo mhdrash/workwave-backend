@@ -9,7 +9,7 @@ const authRouter = require('./controllers/auth.routes');
 const verifyToken = require('./middleware/verify-token');
 const companyRouter = require('./controllers/company.routes');
 const applicationRouter = require('./controllers/application.routes');
-const jobCardRouter = require('./controllers/jobcards.rotes');
+const jobCardRouter = require('./controllers/jobcards.routes');
 const profileRouter = require("./controllers/profile.routes")
 
 mongoose.connect(process.env.MONGODB_URI);
