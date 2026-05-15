@@ -10,7 +10,7 @@ const verifyToken = require('./middleware/verify-token');
 const companyRouter = require('./controllers/company.routes');
 const applicationRouter = require('./controllers/application.routes');
 const jobCardRouter = require('./controllers/jobcards.rotes');
-
+const profileRouter = require("./controllers/profile.routes")
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -27,6 +27,7 @@ app.use('/auth', authRouter);
 app.use('/company', companyRouter);
 app.use('/applications', applicationRouter);
 app.use('/job-cards', jobCardRouter);
+app.use("profile", profileRouter)
 
 app.listen(3000, () => {
   console.log('The express app is ready!');
