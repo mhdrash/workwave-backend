@@ -33,7 +33,6 @@ const experienceSchema = new mongoose.Schema({
     },
     occupation: {
         type: String,
-        required: true,
     },
     location: {
         type: String,
@@ -41,7 +40,6 @@ const experienceSchema = new mongoose.Schema({
     },
     locationType:{
         type: String,
-        required: true,
     },
     startDate: {
         type: String,
@@ -53,7 +51,6 @@ const experienceSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true,
     },
 })
 
